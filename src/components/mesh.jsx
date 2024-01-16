@@ -15,18 +15,43 @@ export default function Mesh({
 
   const $mesh = useRef(null);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     if (activeMesh === idx) {
-      $mesh.current.position.lerp(new THREE.Vector3(0, 0, 6), 0.06);
       $mesh.current.rotation.y += delta;
-    } else {
-      $mesh.current.position.lerp(new THREE.Vector3(...position), 0.06);
     }
   });
 
   useEffect(() => {
     document.body.style.cursor = isHovered ? "pointer" : "auto";
   }, [isHovered]);
+
+  useEffect(() => {
+    const color =
+      activeMesh === idx ? { r: 1, g: 0, b: 0 } : { r: 1, g: 1, b: 1 };
+
+    const newPosition =
+      activeMesh === idx
+        ? {
+            x: 0,
+            y: 0,
+            z: 6,
+          }
+        : {
+            x: position[0],
+            y: position[1],
+            z: position[2],
+          };
+
+    gsap.to($mesh.current.material.color, {
+      ...color,
+      duration: 0.4,
+    });
+
+    gsap.to($mesh.current.position, {
+      ...newPosition,
+      duration: 0.4,
+    });
+  }, [activeMesh, idx, position]);
 
   const toggleActive = (e) => {
     e.stopPropagation();
@@ -48,7 +73,7 @@ export default function Mesh({
       castShadow
     >
       <Geometry args={args} />
-      <meshStandardMaterial color={activeMesh === idx ? "red" : "white"} />
+      <meshStandardMaterial />
     </mesh>
   );
 }
