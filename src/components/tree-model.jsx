@@ -14,5 +14,5 @@ export default function TreeModel() {
     });
   }, [scene]);
 
-  return <primitive object={scene} scale={5} />;
+  return <primitive object={scene} />;
 }

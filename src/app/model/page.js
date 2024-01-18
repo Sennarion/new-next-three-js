@@ -1,10 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import * as THREE from "three";
-import { Canvas, useLoader } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useHelper } from "@react-three/drei";
 import TreeModel from "@/components/tree-model";
 import ShibaModel from "@/components/shiba-model";
+import SceneTexture from "@/components/scene-texture";
 import styles from "../page.module.css";
 
 const animations = [
@@ -30,37 +31,49 @@ const animations = [
   },
 ];
 
-export default function Model() {
-  const grassTexture = useLoader(THREE.TextureLoader, "./images/grass.jpg");
-  grassTexture.repeat.set(20, 20);
-  grassTexture.wrapS = grassTexture.wrapT = THREE.RepeatWrapping;
+const SpotLight = () => {
+  const $light = useRef();
+  useHelper($light, THREE.SpotLightHelper);
 
+  return (
+    <spotLight
+      ref={$light}
+      color="yellow"
+      angle={10}
+      intensity={4}
+      position={[0, 2, 0]}
+      castShadow
+    />
+  );
+};
+
+export default function Model() {
   const [activeAnimation, setActiveAnimation] = useState(animations[1].action);
 
   return (
     <main className={styles.main}>
-      <Canvas
-        camera={{ position: [-3, -0.6, 6] }}
-        style={{ background: "#f0ff8f" }}
-        shadows
-      >
-        <OrbitControls minDistance={6} maxDistance={8} />
+      <Canvas camera={{ position: [-3, 2, 8] }} shadows>
+        <SceneTexture
+          textures={[
+            "./images/sky-tex-right.jpg",
+            "./images/sky-tex-left.jpg",
+            "./images/sky-tex-top.jpg",
+            "./images/sky-tex-bottom.jpg",
+            "./images/sky-tex-front.jpg",
+            "./images/sky-tex-back.jpg",
+          ]}
+        />
+        <OrbitControls
+          minDistance={1.4}
+          maxDistance={2}
+          maxPolarAngle={Math.PI / 2}
+        />
         <ambientLight intensity={2} />
-        <hemisphereLight args={[0xffffbb, 0x080820]} intensity={1} />
-        {/* <spotLight
-          penumbra={1}
-          angle={10}
-          intensity={100}
-          position={[10, 10, 0]}
-          castShadow
-        /> */}
-        <group position={[0, -2, 0]}>
+        <hemisphereLight args={[0xffffbb, 0x080820]} intensity={0.2} />
+        <SpotLight />
+        <group position={[0, -0.2, 0]}>
           <TreeModel />
           <ShibaModel activeAnimation={activeAnimation} />
-          <mesh rotation-x={-0.5 * Math.PI} position={[0, 0.34, 0]}>
-            <circleGeometry args={[30, 30]} />
-            <meshBasicMaterial map={grassTexture} />
-          </mesh>
         </group>
       </Canvas>
       <ul className={styles.buttonsList}>

@@ -37,7 +37,8 @@
 
 .buttonsList {
   position: absolute;
-  margin-right: 10rem;
+  margin-left: 10%;
+  list-style: none;
 }
 
 .buttonItem:not(:last-child) {
@@ -48,19 +49,19 @@
   width: 100%;
   padding: 1rem 3rem;
 
-  color: brown;
-  background: none;
-  border: 2px solid brown;
+  color: green;
+  background-color: white;
   border-radius: 1rem;
+  border: none;
 
   cursor: pointer;
   transition:
     color 0.2s ease,
-    border-color 0.2s ease;
+    background-color 0.2s ease;
 }
 
 .button:hover,
 .button:focus {
   color: white;
-  border-color: white;
+  background-color: green;
 }

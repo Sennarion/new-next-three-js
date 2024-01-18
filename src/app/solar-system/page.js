@@ -1,8 +1,8 @@
 "use client";
-import * as THREE from "three";
-import { Canvas, useThree } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import SolarObject from "@/components/solar-object";
+import SceneTexture from "@/components/scene-texture";
 import styles from "../page.module.css";
 
 const solarObjects = [
@@ -91,23 +91,6 @@ const solarObjects = [
   },
 ];
 
-function BackgroundTexture() {
-  const { scene } = useThree();
-  const cubeTextureLoader = new THREE.CubeTextureLoader();
-  const backgroundTexture = cubeTextureLoader.load([
-    "./images/stars.jpg",
-    "./images/stars.jpg",
-    "./images/stars.jpg",
-    "./images/stars.jpg",
-    "./images/stars.jpg",
-    "./images/stars.jpg",
-  ]);
-
-  scene.background = backgroundTexture;
-
-  return null;
-}
-
 export default function SolarSystem() {
   return (
     <main className={styles.main}>
@@ -115,7 +98,16 @@ export default function SolarSystem() {
         camera={{ position: [-100, 100, 150] }}
         style={{ background: "black" }}
       >
-        <BackgroundTexture />
+        <SceneTexture
+          textures={[
+            "./images/stars.jpg",
+            "./images/stars.jpg",
+            "./images/stars.jpg",
+            "./images/stars.jpg",
+            "./images/stars.jpg",
+            "./images/stars.jpg",
+          ]}
+        />
         <ambientLight intensity={0.2} />
         <pointLight intensity={10000} distance={1000} color={0xffffff} />
         <OrbitControls maxDistance={400} minDistance={80} />

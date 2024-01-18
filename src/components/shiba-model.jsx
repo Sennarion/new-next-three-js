@@ -16,7 +16,7 @@ export default function ShibaModel({ activeAnimation }) {
   }, [actions, activeAnimation]);
 
   return (
-    <group ref={$group} dispose={null} position={[-2.4, 0.6, 3.6]}>
+    <group ref={$group} dispose={null} position={[-0.6, 0.12, 0.6]} scale={0.2}>
       <group name="Sketchfab_Scene">
         <primitive object={nodes.GLTF_created_0_rootJoint} castShadow />
         <skinnedMesh

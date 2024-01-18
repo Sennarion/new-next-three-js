@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import ParticleRing from "@/components/bg";
+import ParticleRing from "@/components/particle-ring";
 import styles from "./page.module.css";
 
 export default function Home() {
