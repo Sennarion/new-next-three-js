@@ -19,7 +19,7 @@ const ParticleRing = () => {
 };
 
 const PointCircle = () => {
-  const ref = useRef(null);
+  const $ref = useRef(null);
   const { pointer, camera } = useThree();
   const vec = new Vector3();
 
@@ -31,11 +31,11 @@ const PointCircle = () => {
 
     camera.lookAt(10, 10, 0);
 
-    ref.current.rotation.z = clock.getElapsedTime() * 0.05;
+    $ref.current.rotation.z = clock.getElapsedTime() * 0.05;
   });
 
   return (
-    <group ref={ref}>
+    <group ref={$ref}>
       {pointsInner.map(({ idx, position, color }) => (
         <Point key={idx} position={position} color={color} />
       ))}

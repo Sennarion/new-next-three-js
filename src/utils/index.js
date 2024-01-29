@@ -66,3 +66,15 @@ const generatePoints = (length, isInner) => {
 
 export const pointsInner = generatePoints(NUM_POINTS, true);
 export const pointsOuter = generatePoints(NUM_POINTS / 4, false);
+
+export const transformAnimationName = (animationName) => {
+  const result = animationName.replace(/_(skeletal\.3)\b/, "").trim();
+
+  const words = result
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1));
+
+  const transformedAnimationName = words.join(" ");
+
+  return transformedAnimationName;
+};

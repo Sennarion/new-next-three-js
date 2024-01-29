@@ -1,19 +1,26 @@
 import { useRef, useEffect } from "react";
 import { useGLTF, useAnimations } from "@react-three/drei";
+import { useShibaAnimation } from "@/contexts/shiba-animation";
 
-export default function ShibaModel({ activeAnimation }) {
+export default function ShibaModel() {
   const $group = useRef();
   const { nodes, materials, animations } = useGLTF("/shiba.glb");
-  const { actions } = useAnimations(animations, $group);
+  const { setAnimations, animationIdx } = useShibaAnimation();
+  const { actions, names } = useAnimations(animations, $group);
 
   useEffect(() => {
-    if (actions[activeAnimation])
-      actions[activeAnimation].reset().fadeIn(0.5).play();
+    setAnimations(names);
+  }, [names, setAnimations]);
+
+  useEffect(() => {
+    if (actions[names[animationIdx]])
+      actions[names[animationIdx]].reset().fadeIn(0.5).play();
 
     return () => {
-      if (actions[activeAnimation]) actions[activeAnimation].fadeOut(0.5);
+      if (actions[names[animationIdx]])
+        actions[names[animationIdx]].fadeOut(0.5);
     };
-  }, [actions, activeAnimation]);
+  }, [actions, animationIdx, names]);
 
   return (
     <group ref={$group} dispose={null} position={[-0.6, 0.12, 0.6]} scale={0.2}>
