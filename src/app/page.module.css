@@ -65,3 +65,40 @@
   color: white;
   background-color: green;
 }
+
+.hints {
+  position: absolute;
+  z-index: 10;
+  bottom: 10rem;
+  left: 10rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  pointer-events: none;
+}
+
+.hintW {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.hint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+
+  font-size: 1.4rem;
+  color: #fff;
+
+  background-color: gray;
+  border-radius: 0.6rem;
+}
+
+.active {
+  background-color: blue;
+}

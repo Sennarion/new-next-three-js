@@ -20,6 +20,9 @@ export default function Home() {
             <Link className={styles.link} href="/model">
               external 3D model
             </Link>
+            <Link className={styles.link} href="/roller">
+              interactive roller
+            </Link>
           </li>
         </ul>
       </div>
