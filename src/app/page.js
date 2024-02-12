@@ -18,10 +18,13 @@ export default function Home() {
               solar system
             </Link>
             <Link className={styles.link} href="/model">
-              external 3D model
+              interactive 3D model
             </Link>
             <Link className={styles.link} href="/roller">
               interactive roller
+            </Link>
+            <Link className={styles.link} href="/table-configurator">
+              table configurator
             </Link>
           </li>
         </ul>
