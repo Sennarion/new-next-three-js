@@ -8,7 +8,19 @@ export default function Home() {
     <main className={styles.main}>
       <ParticleRing />
       <div className={styles.content}>
-        <h1 className={styles.title}>my practical works:</h1>
+        <h2 className={styles.title}>theory:</h2>
+        <ul className={styles.list}>
+          <li className={styles.listItem}>
+            <a
+              className={styles.link}
+              href="https://docs.google.com/document/d/1loYSZDKZHNJlGwNKIv6dXRPNR8vseXhpHhSRLyE3WQo/edit"
+              target="_blank"
+            >
+              basics of webgl
+            </a>
+          </li>
+        </ul>
+        <h2 className={styles.title}>practical works:</h2>
         <ul className={styles.list}>
           <li className={styles.listItem}>
             <Link className={styles.link} href="/events">
@@ -25,6 +37,9 @@ export default function Home() {
             </Link>
             <Link className={styles.link} href="/table-configurator">
               table configurator
+            </Link>
+            <Link className={styles.link} href="/look-at-mouse">
+              look at mouse
             </Link>
           </li>
         </ul>
