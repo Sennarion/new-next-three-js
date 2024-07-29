@@ -3,6 +3,16 @@ import Link from "next/link";
 import ParticleRing from "@/components/particle-ring";
 import styles from "./page.module.css";
 
+const nav = [
+  { title: "interactive mesh of geometries", href: "/events" },
+  { title: "solar system", href: "/solar-system" },
+  { title: "interactive 3D model", href: "/model" },
+  { title: "interactive roller", href: "/roller" },
+  { title: "table configurator", href: "/table-configurator" },
+  { title: "look at mouse", href: "/look-at-mouse" },
+  { title: "neural sphere", href: "/neural-network" },
+];
+
 export default function Home() {
   return (
     <main className={styles.main}>
@@ -22,26 +32,13 @@ export default function Home() {
         </ul>
         <h2 className={styles.title}>practical works:</h2>
         <ul className={styles.list}>
-          <li className={styles.listItem}>
-            <Link className={styles.link} href="/events">
-              interactive mesh of geometries
-            </Link>
-            <Link className={styles.link} href="/solar-system">
-              solar system
-            </Link>
-            <Link className={styles.link} href="/model">
-              interactive 3D model
-            </Link>
-            <Link className={styles.link} href="/roller">
-              interactive roller
-            </Link>
-            <Link className={styles.link} href="/table-configurator">
-              table configurator
-            </Link>
-            <Link className={styles.link} href="/look-at-mouse">
-              look at mouse
-            </Link>
-          </li>
+          {nav.map(({ title, href }) => (
+            <li className={styles.listItem} key={title}>
+              <Link className={styles.link} href={href}>
+                {title}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </main>
